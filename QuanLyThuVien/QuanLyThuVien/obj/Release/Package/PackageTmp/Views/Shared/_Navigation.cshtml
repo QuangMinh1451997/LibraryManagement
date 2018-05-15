@@ -1,0 +1,68 @@
+﻿<div class="row mid">
+    <div class="side-bar col-sm-12" style="padding:0px;">
+        <div class="panel-group menu">
+            <div class="panel panel-success">
+                <!-- Quản lý tài kkhoarn -->
+                <div class="panel-heading" data-toggle="collapse" href="#collapse1">
+                    <h4 class="panel-title">
+                        <a href="#">Quản lý tài khoản</a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse submenu" style="padding-left:20px;">
+                    @Html.ActionLink("Danh sách tài khoản", "Index", "Users", null, htmlAttributes: new { @class = "panel-body" })
+                    @Html.ActionLink("Thêm tài khoản", "Create", "Users", null, htmlAttributes: new { @class = "panel-body" })
+                </div>
+                <!-- Quản lý chuyên nghành -->
+                <div class="panel-heading" data-toggle="collapse" href="#collapse2">
+                    <h4 class="panel-title">
+                        <a href="#">Quản lý chuyên nghành</a>
+                    </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse submenu" style="padding-left:20px;">
+                    @Html.ActionLink("Danh sách chuyên nghành", "Index", "ChuyenNghanhs", null, htmlAttributes: new { @class = "panel-body" })
+                    @Html.ActionLink("Thêm chuyên nghành", "Create", "ChuyenNghanhs", null, htmlAttributes: new { @class = "panel-body" })
+                </div>
+                <!-- Quản lý đầu sách -->
+                <div class="panel-heading" data-toggle="collapse" href="#collapse3">
+                    <h4 class="panel-title">
+                        <a href="#">Quản lý đầu sách</a>
+                    </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse submenu" style="padding-left:20px;">
+                    @Html.ActionLink("Danh sách các đầu sách", "Index", "MonAn", null, htmlAttributes: new { @class = "panel-body" })
+                    @Html.ActionLink("Thêm đầu sách", "Create", "MonAn", null, htmlAttributes: new { @class = "panel-body" })
+                </div>
+                <!-- Quản lý nhân viên -->
+                <div class="panel-heading" data-toggle="collapse" href="#collapse4">
+                    <h4 class="panel-title">
+                        <a href="#">Quản lý nhân viên</a>
+                    </h4>
+                </div>
+                <div id="collapse4" class="panel-collapse collapse submenu" style="padding-left:20px;">
+                    @Html.ActionLink("Danh sách nhân vien", "Index", "DichVu", null, htmlAttributes: new { @class = "panel-body" })
+                    @Html.ActionLink("Thêm nhân viên", "Create", "DichVu", null, htmlAttributes: new { @class = "panel-body" })
+                </div>
+                <!-- Quản lý sách-->
+                <div class="panel-heading" data-toggle="collapse" href="#collapse5">
+                    <h4 class="panel-title">
+                        <a href="#">Quản lý sách</a>
+                    </h4>
+                </div>
+                <div id="collapse5" class="panel-collapse collapse submenu" style="padding-left:20px;">
+                    @Html.ActionLink("Thông tin sách", "Index", "HoaDons", null, htmlAttributes: new { @class = "panel-body" })
+                    @Html.ActionLink("Thêm sách", "Index", "BaoCao", null, htmlAttributes: new { @class = "panel-body" })
+                </div>
+                <!-- Báo cáo thống kê -->
+                <div class="panel-heading" data-toggle="collapse" href="#collapse6">
+                    <h4 class="panel-title">
+                        <a href="#">Báo cáo và thống kê</a>
+                    </h4>
+                </div>
+                <div id="collapse6" class="panel-collapse collapse submenu" style="padding-left:20px;">
+                    @Html.ActionLink("Báo cáo", "Index", "Ca", null, htmlAttributes: new { @class = "panel-body" })
+                    @Html.ActionLink("Thống kê", "Index", "ThamSo", null, htmlAttributes: new { @class = "panel-body" })
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>

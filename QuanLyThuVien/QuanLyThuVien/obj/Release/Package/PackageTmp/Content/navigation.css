@@ -1,0 +1,28 @@
+﻿#color-blend1 {
+    background-color: #768FDf;
+}
+
+#color-blend2 {
+    background-color: #ec7b7d;
+}
+
+#color-blend3 {
+    background-color: #FDC168;
+}
+
+#color-blend4 {
+    background-color: #91d1be;
+}
+
+.side-bar {
+    background: #dff0d8;
+}
+
+.panel-heading {
+    cursor: pointer;
+}
+
+.submenu a {
+    display: block;
+    text-decoration: none;
+}

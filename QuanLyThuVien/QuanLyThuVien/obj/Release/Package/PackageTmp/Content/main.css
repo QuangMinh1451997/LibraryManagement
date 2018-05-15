@@ -1,0 +1,19 @@
+
+body {
+    padding: 0;
+}
+.section {
+    padding: 0;
+}
+.row {
+    margin: 0;
+}
+.table-data-center th, .table-data-center td {
+    text-align: center;
+}
+.table-image-50 tbody > tr > td {
+    line-height: 50px;
+}
+.button-250 {
+    width: 250px;
+}

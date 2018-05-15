@@ -1,0 +1,103 @@
+﻿@model QuanLyThuVien.Models.DocGia
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_FrameLayout.cshtml";
+}
+
+<h2>Sửa thông tin độc giả</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="container-fluid">
+        <div class="row div-content">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <td class="form-group">
+                                <!-- Sửa label tại đây-->
+                                @Html.Label("Mã độc giả", htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.MaDocGia, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.MaDocGia, "", new { @class = "text-danger" })
+                                </div>
+                            </td>
+                            <td class="form-group">
+                                <!-- Sửa label tại đây-->
+                                @Html.Label("Họ tên", htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.HoTen, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    @Html.ValidationMessageFor(model => model.HoTen, "", new { @class = "text-danger" })
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="form-group">
+                                <!-- Sửa label tại đây-->
+                                @Html.Label("Lớp", htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.Lop, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Lop, "", new { @class = "text-danger" })
+                                </div>
+                            </td>
+                            <td class="form-group">
+                                @Html.Label("Ngày sinh", htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.NgaySinh, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.NgaySinh, "", new { @class = "text-danger" })
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="form-group">
+                                <!-- Sửa label tại đây-->
+                                @Html.Label("Giới tính", htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.GioiTinh, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.GioiTinh, "", new { @class = "text-danger" })
+                                </div>
+                            </td>
+                            <td class="form-group">
+                                @Html.Label("Mã số SV", htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.MSSV, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.MSSV, "", new { @class = "text-danger" })
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="form-group">
+                                <!-- Sửa label tại đây-->
+                                @Html.Label("Deleted", htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-9">
+                                    @Html.EditorFor(model => model.Deleted, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Deleted, "", new { @class = "text-danger" })
+                                </div>
+                            </td>
+                            <td class="form-group">
+                               
+                            </td>
+                        </tr>
+                        <tr class="div-btn-ok-back">
+                            <td class="form-group div-button">
+                                <input style="float:right;" value="Làm mới" class="btn btn-default" />
+                            </td>
+                            <td class="form-group div-button">
+                                <input style="" type="submit" value="Lưu" class="btn btn-default" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div>
+                    @Html.ActionLink("Quay lại", "Index")
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

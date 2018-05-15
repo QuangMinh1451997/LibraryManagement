@@ -1,0 +1,75 @@
+﻿@model QuanLyThuVien.Models.LoginModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Quản lý thư viện</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <section id="login">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4"></div>
+                <div class="col-xs-4">
+                    <h1>Đăng nhập hệ thống</h1>
+                    @using (Html.BeginForm("Login", "Login", FormMethod.Post, htmlAttributes: new { @autocomplete = "off" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", @placeholder = "Tên tài khoản" } })
+                            @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mật khẩu", @type = "password" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                        @*<div class="form-group checkbox">
+                                <label class="control-label"><input type="checkbox" name="remember" /> Nhớ tài khoản</label>
+                            </div>*@
+                        @*<label class="checkbox-inline"><input type="checkbox" value="">Option 1</label>*@
+                        <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Đăng nhập">
+                    }
+                    <hr>
+                </div>
+                <div class="col-xs-4"></div>
+            </div>
+        </div>
+
+    </section>
+    <div class="modal fade forget-modal" tabindex="-1" role="dialog" aria-labelledby="myForgetModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm" style="width:335px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">×</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title">Khôi phục mật khẩu</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Nhập ID hoặc mã nhân viên</p>
+                    <input name="recovery-email" id="recovery-email" class="form-control" autocomplete="off">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Trở lại</button>
+                    <button type="button" class="btn btn-custom">Chấp nhận</button>
+                </div>
+            </div> <!-- /.modal-content -->
+        </div> <!-- /.modal-dialog -->
+    </div> <!-- /.modal -->
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+</body>
+</html>

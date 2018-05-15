@@ -1,0 +1,57 @@
+﻿@model QuanLyThuVien.Models.Sach
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_FrameLayout.cshtml";
+}
+
+<h2>Xóa</h2>
+
+<h3>Bạn thật sự muốn xóa ?</h3>
+<div>
+    <h4>Sach</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DauSach.TenDauSach)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DauSach.TenDauSach)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TinhTrang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TinhTrang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayNhap)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayNhap)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Deleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Deleted)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,36 @@
+﻿@model QuanLyThuVien.Models.Sach
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            <td class="form-group">
+                <label class="control-label col-md-5">Mã sách: </label>
+                <label class="control-label col-md-7">@Model.MaSach</label>
+            </td>
+            <td class="form-group">
+                <label class="control-label col-md-5">Mã đầu sách: </label>
+                <label class="control-label col-md-7">@Model.MaDauSach</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="form-group">
+                <label class="control-label col-md-5">Tên sách: </label>
+                <label class="control-label col-md-7">@Model.DauSach.TenDauSach</label>
+            </td>
+            <td>
+                <label class="control-label col-md-5">Tình trạng: </label>
+                <label class="control-label col-md-7">@Model.TinhTrang</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="form-group">
+                <label class="control-label col-md-5">Ngày nhập: </label>
+                <label class="control-label col-md-7">@Model.NgayNhap</label>
+            </td>
+            <td class="form-group">
+                <label class="control-label col-md-5">Deleted </label>
+                <label class="control-label col-md-7">@Model.Deleted</label>
+            </td>
+        </tr>
+    </tbody>
+</table>

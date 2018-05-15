@@ -1,0 +1,41 @@
+﻿@model QuanLyThuVien.Models.ChuyenNghanh
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_FrameLayout.cshtml";
+}
+
+<h2>Chi tiết chuyên nghành</h2>
+<div class="table-responsive">
+    <table class="hover-td table table-bordered">
+        <tbody>
+            <tr>
+                <td class="form-group">
+                    <label class="control-label col-md-5">Mã chuyên nghành: </label>
+                    <label class="control-label col-md-7">@Model.MaChuyenNghanh</label>
+                </td>
+                <td class="form-group">
+                    <label class="control-label col-md-5">Tên chuyên nghành: </label>
+                    <label class="control-label col-md-7">@Model.TenChuyenNghanh</label>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="form-group">
+                    <label class="control-label col-md-5">Mô tả : </label>
+                    <label class="control-label col-md-7">@Model.MoTa</label>
+                </td>
+                <td class="form-group">
+                    <label class="control-label col-md-5">Deleted : </label>
+                    <label class="control-label col-md-7">@Model.Deleted</label>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.MaChuyenNghanh }) |
+    @Html.ActionLink("Quay lại", "Index")
+</p>
+

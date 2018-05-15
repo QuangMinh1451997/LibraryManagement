@@ -1,0 +1,75 @@
+﻿@model QuanLyThuVien.Models.ChuyenNghanh
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_FrameLayout.cshtml";
+}
+
+<h2>Thêm chuyên nghành</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <!-- Container table create item -->
+        <div class="container-fluid">
+            <div class="row div-content">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <td class="form-group">
+                                    <!-- Sửa label tại đây-->
+                                    @Html.Label("Mã chuyên nghành", htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.MaChuyenNghanh, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.MaChuyenNghanh, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                                <td class="form-group">
+                                    <!-- Sửa label tại đây-->
+                                    @Html.Label("Tên chuyên nghành", htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.TenChuyenNghanh, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.TenChuyenNghanh, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="form-group">
+                                    <!-- Sửa label tại đây-->
+                                    @Html.Label("Mô tả", htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8">
+                                        @Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                                <td class="form-group">
+                                    @Html.Label("Deleted", htmlAttributes: new { @class = "control-label col-md-4" })
+                                    <div class="col-md-8">
+                                        <div class="checkbox">
+                                            @Html.EditorFor(model => model.Deleted)
+                                            @Html.ValidationMessageFor(model => model.Deleted, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="div-btn-ok-back">
+                                <td class="form-group div-button">
+                                    <input style="float:right;" , type="button" value="Làm mới" class="btn btn-default" />
+                                </td>
+                                <td class="form-group div-button">
+                                    <input style="" type="submit" value="Lưu" class="btn btn-default btn-save" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div>
+                        @Html.ActionLink("Quay lại", "Index")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

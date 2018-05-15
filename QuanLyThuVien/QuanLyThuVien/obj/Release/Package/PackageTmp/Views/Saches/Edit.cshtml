@@ -1,0 +1,88 @@
+﻿@model QuanLyThuVien.Models.Sach
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_FrameLayout.cshtml";
+}
+
+<h2>Sửa thông tin sách</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <hr />
+        <!-- Container table create item -->
+        <div class="container-fluid">
+            <div class="row div-content">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <td class="form-group">
+                                    <!-- Sửa label tại đây-->
+                                    @Html.Label("Mã sách", htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.MaSach, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.MaSach, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                                <td class="form-group">
+                                    <!-- Sửa label tại đây-->
+                                    @Html.Label("Mã đầu sách", htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.MaDauSach, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.MaDauSach, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="form-group">
+                                    <!-- Sửa label tại đây-->
+                                    @Html.Label("Tình trạng", htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.TinhTrang, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.TinhTrang, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                                <td class="form-group">
+                                    @Html.Label("Ngày nhập", htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.NgayNhap, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.NgayNhap, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="form-group">
+                                    <!-- Sửa label tại đây-->
+                                    @Html.Label("Deleted", htmlAttributes: new { @class = "control-label col-md-3" })
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.Deleted, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Deleted, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                                <td class="form-group"></td>
+                            </tr>
+                            <tr class="div-btn-ok-back">
+                                <td class="form-group div-button">
+                                    <input style="float:right;" value="Làm mới" class="btn btn-default" />
+                                </td>
+                                <td class="form-group div-button">
+                                    <input style="" type="submit" value="Lưu" class="btn btn-default" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div>
+                        @Html.ActionLink("Quay lại", "Index")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

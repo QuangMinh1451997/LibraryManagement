@@ -1,0 +1,46 @@
+﻿@model QuanLyThuVien.Models.NhanVien
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            <td class="form-group">
+                <label class="control-label col-md-5">Mã nhân viên: </label>
+                <label class="control-label col-md-7">@Model.MaNhanVien</label>
+            </td>
+            <td class="form-group">
+                <label class="control-label col-md-5">Tên nhân viên: </label>
+                <label class="control-label col-md-7">@Model.TenNhanVien</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="form-group">
+                <label class="control-label col-md-5">Ngày sinh: </label>
+                <label class="control-label col-md-7">@Model.NgaySinh</label>
+            </td>
+            <td>
+                <label class="control-label col-md-5">Địa chỉ: </label>
+                <label class="control-label col-md-7">@Model.DiaChi</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="form-group">
+                <label class="control-label col-md-5">Số điện thoại: </label>
+                <label class="control-label col-md-7">@Model.SoDienThoai</label>
+            </td>
+            <td class="form-group">
+                <label class="control-label col-md-5">URL Hình ảnh </label>
+                <label class="control-label col-md-7">@Model.UrlHinhAnh</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="form-group">
+                <label class="control-label col-md-5">Deleted: </label>
+                <label class="control-label col-md-7">@Model.Deleted</label>
+            </td>
+            <td>
+               
+            </td>
+        </tr>
+    </tbody>
+</table>

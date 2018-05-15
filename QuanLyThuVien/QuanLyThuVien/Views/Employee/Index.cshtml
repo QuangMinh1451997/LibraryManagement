@@ -1,0 +1,50 @@
+﻿@model PagedList.IPagedList<Model.EF.Employee>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Quản lý nhân viên";
+    Layout = "~/Views/Shared/_FrameLayout.cshtml";
+}
+
+<h2>Danh sách nhân viên</h2>
+
+<p>
+    @Html.ActionLink("Thêm nhân viên", "Create")
+</p>
+<div class="table-responsive div-body">
+
+    <table class="table-data-center table-image-50 table table-hover">
+        <thead>
+            <tr>
+                <th>Ảnh</th>
+                <th>Tên nhân viên</th>
+                <th>Ngày sinh</th>
+                <th>Địa chỉ</th>
+                <th>Số điện thoại</th>
+                <th>Vai trò</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td><img src="~/Upload/Images/Employee/@item.UrlAvatar" height="50" width="50" /></td>
+                        <td>@item.FullName</td>
+                        <td>@item.BirthDay.ToString("dd/MM/yyyy")</td>
+                        <td>@item.Address</td>
+                        <td>@item.Phone</td>
+                        <td>@item.Account.Permission.PermissionName</td>
+                        <td>
+                            @Html.ActionLink("Xem", "Details", "Employee", new { id = item.EmployeeID }, htmlAttributes: new { @class = "details", @at = item.EmployeeID })
+                            @Html.ActionLink("Sửa", "Edit", "Employee", new { id = item.EmployeeID }, null)
+                            @Html.ActionLink("Xóa", "delete", "Employee", new { id = item.EmployeeID }, htmlAttributes: new { @class = "link-delete", @at = "/NhanViens" })
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageNumber
+    @Html.PagedListPager(Model, page=> Url.Action("Index", new { page }))
+</div>

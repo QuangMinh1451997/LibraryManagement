@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Model.EF.NhanVien>
+
+@{
+    ViewBag.Title = "Quản lý nhân viên";
+    Layout = "~/Views/Shared/_FrameLayout.cshtml";
+}
+
+<h2>Danh sách nhân viên</h2>
+
+<p>
+    @Html.ActionLink("Thêm nhân viên", "Create")
+</p>
+<div class="table-responsive div-body">
+
+    <table class="table-data-center table-image-50 table table-hover">
+        <thead>
+            <tr>
+                <th>Ảnh</th>
+                <th>Tên nhân viên</th>
+                <th>Ngày sinh</th>
+                <th>Địa chỉ</th>
+                <th>Số điện thoại</th>
+                <th>Tên tài khoản</th>
+                <th>Vai trò</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td><img src="~/Upload/Images/NhanVien/@item.UrlHinhAnh" height="50" width="50" /></td>
+                        <td>@item.TenNhanVien</td>
+                        <td>@item.NgaySinh.ToString("dd/MM/yyyy")</td>
+                        <td>@item.DiaChi</td>
+                        <td>@item.SoDienThoai</td>
+                        <td>@item.Username</td>
+                        <td>@item.Permission.PermissionName</td>
+                        <td>
+                            @Html.ActionLink("Xem", "Details", "NhanVien", new { id = item.MaNhanVien }, htmlAttributes: new { @class = "details", @at = item.MaNhanVien })
+                            @Html.ActionLink("Sửa", "Edit", "NhanVien", new { id = item.MaNhanVien }, null)
+                            @Html.ActionLink("Xóa", "delete", "NhanVien", new { id = item.MaNhanVien }, htmlAttributes: new { @class = "link-delete", @at = "/NhanViens" })
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

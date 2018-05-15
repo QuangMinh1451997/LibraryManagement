@@ -1,0 +1,101 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Quản lý thư viện</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("css", false)
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <div class="container-fluid">
+
+        <div class="row row-header">
+            @RenderPage("~/Views/Shared/_Header.cshtml")
+        </div>
+
+        <div class="row row-section">
+            <div class="col-md-2 col-navigation border-box" style="padding:0px;">
+                @RenderPage("~/Views/Shared/_Navigation.cshtml")
+            </div>
+            <div class="col-md-10 col-content ">
+                @RenderBody()
+            </div>
+        </div>
+        <div class="row row-footer" id="footer">
+            <footer class="page-footer font-small blue pt-4 mt-4" style="background-color:#0B7834;">
+                <!--Footer Links-->
+                <div class="container-fluid text-center text-md-left">
+                    <DIV class="ftmain" id="footer">
+                        <div class="row">
+                            <!--First column-->
+                            <div class="col-md-6" id="ft" style="color:white;text-align:left;padding:0px;">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h5><strong>Thư viện XIAOMI</strong></h5>
+                                        <p style="font-size:14px;">Tự tin là thư viện lớn số 1 tại Thành Phố Hồ Chí Minh.<br>Cung cấp đầy đủ các loại sach trong nước và quốc tế .</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--Second column-->
+                            <div class="col-md-3" id="ft" style="padding:0px;text-align:left;">
+                                <h5 style="color:white"><strong>&nbsp;Truy cập nhanh</strong></h5>
+
+                                <ul class="list-unstyled">
+                                    <li>
+                                        <a href="https://www.Facebook.com" target="_blank" style="padding:2px;">
+                                            <i class="fa fa-facebook-square" title="Facebook" style="font-size:38px;color:white"></i>
+                                        </a>
+
+                                        <a href="https://www.Twitter.com" target="_blank" style="padding:2px;">
+                                            <i class="fa fa-twitter-square" title="Twitter" style="font-size:38px;color:white"></i>
+                                        </a>
+
+                                        <a href="https://www.Youtube.com" target="_blank" style="padding:2px;">
+                                            <i class="fa fa-youtube-square" title="Youtube" style="font-size:38px;color:white"></i>
+                                        </a>
+
+                                        <a href="https://www.github.com" target="_blank" style="padding:2px;">
+                                            <i class="fa fa-git-square" title="Github" style="font-size:38px;color:white;"></i>
+                                        </a>
+
+                                    </li>
+
+                                </ul>
+                            </div>
+                            <!--/.First column-->
+                            <div class="col-md-3" id="ft" style="margin-top:10px;">
+                                <a href="#">
+                                    <img src="~/Content/images/sgo.png" alt="Logo" style="width:215px;height:65px">
+                                </a>
+                            </div>
+                        </div>
+                        <!--/.Second column-->
+                    </DIV>
+                </div>
+                <!--/.Footer Links-->
+                <!--Copyright-->
+                <div class="footer-copyright py-6 text-center" style="color:black;background-color:#003300;height:27px">
+                    <p style="float:right;color:white;margin:2px;"><strong>Web quản lý thư viện XIAOMI &nbsp &nbsp </strong></p>
+                </div>
+                <!--/.Copyright-->
+
+            </footer>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
+

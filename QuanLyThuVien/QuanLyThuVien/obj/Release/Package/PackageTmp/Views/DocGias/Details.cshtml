@@ -1,0 +1,52 @@
+﻿@model QuanLyThuVien.Models.DocGia
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_FrameLayout.cshtml";
+}
+
+<h2>Thông tin đọc giả</h2>
+    <div class="table-responsive">
+        <table class="hover-td table table-bordered">
+            <tbody>
+                <tr>
+                    <td class="form-group">
+                        <label class="control-label col-md-5">Họ và tên: </label>
+                        <label class="control-label col-md-7">@Model.HoTen</label>
+                    </td>
+                    <td class="form-group">
+                        <label class="control-label col-md-5">Lớp: </label>
+                        <label class="control-label col-md-7">@Model.Lop</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="form-group">
+                        <label class="control-label col-md-5">Ngày sinh : </label>
+                        <label class="control-label col-md-7">@Model.NgaySinh</label>
+                    </td>
+                    <td class="form-group">
+                        <label class="control-label col-md-5">Giới tính : </label>
+                        <label class="control-label col-md-7">@Model.GioiTinh</label>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="form-group">
+                        <label class="control-label col-md-5">Mã số SV : </label>
+                        <label class="control-label col-md-7">@Model.MSSV</label>
+                    </td>
+                    <td class="form-group">
+                        <label class="control-label col-md-5">Deleted : </label>
+                        <label class="control-label col-md-7">@Model.Deleted</label>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p>
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.MaDocGia }) |
+        @Html.ActionLink("Quay lại", "Index")
+    </p>
+ 
