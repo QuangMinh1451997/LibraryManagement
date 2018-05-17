@@ -23,8 +23,9 @@ namespace Model.EF
 
         public virtual Employee Employee { get; set; }
 
-        public int PermissionID { get; set; }
+        public Account()
+        {
 
-        public virtual Permission Permission { get; set; }
+        }
     }
 }

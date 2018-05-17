@@ -41,8 +41,7 @@ namespace QuanLyThuVien.Controllers
                     path = Path.Combine(Server.MapPath("~/Upload/Images/Employee"), employeeUpdate.UrlAvatar);
                 }
                 var user = (EmployeeLogin)Session[Common.CommonSession.USER_SESSION];
-                employeeUpdate.CreateBy = user.Username;
-                var employeeUpdated = dao.Edit(employeeUpdate, user);
+                var employeeUpdated = dao.EditByUser(employeeUpdate, user.Username);
                 if (employeeUpdated == null)
                 {
                     ModelState.AddModelError("", "Có lỗi xãy ra vui lòng thữ lại !!!");
@@ -54,6 +53,55 @@ namespace QuanLyThuVien.Controllers
                 return Content("<script>alert('Đã lưu'); window.location.href='/User/Details'</script>");
             }
             return View(employeeUpdate);      
+        }
+
+        [HttpGet]
+        public ActionResult ChangePassword(int? id)
+        {
+            if (id == null)
+                return HttpNotFound();
+            var dao = new EmployeeDAO();
+            var employee = dao.GetEmployeeByID(id.Value);
+            var accountModel = new AccountModel()
+            {
+                EmployeeID = employee.EmployeeID,
+                Username = employee.Account.Username,
+                UrlAvatar = employee.UrlAvatar
+            };
+            return View(accountModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword([Bind(Include = "EmployeeID, Username, OldPassword, Password, ConfirmPassword, UrlAvatar")]AccountModel accountUpdate)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var dao = new AccountDAO();
+                    int result = dao.ChangePassword(accountUpdate.EmployeeID, accountUpdate.Username, accountUpdate.OldPassword, accountUpdate.Password);
+                    if(result == -1)
+                    {
+                        ModelState.AddModelError("", "Tài khoản không tồn tại. Vui lòng thữ lại hoặc tải lại trang");
+                        return HttpNotFound();
+                    }
+                    else if(result == -2)
+                    {
+                        ModelState.AddModelError("", "Mật khẩu hiện tại không chính xác");
+                    }
+                    else if (result==1)
+                        return Content("<script>alert('Đã lưu');window.location.href='/User/Details'</script>");
+                    
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "Thay đổi mật khẩu thất bại. Vui lòng thữ lại !!!");
+                }
+            }
+            accountUpdate.Password = "";
+            accountUpdate.ConfirmPassword = "";
+            return View(accountUpdate);
         }
 
         public ActionResult Logout()

@@ -18,6 +18,6 @@ namespace Model.EF
 
         public bool ThuThu { get; set; }
 
-        public virtual ICollection<Account> Accounts { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
     }
 }

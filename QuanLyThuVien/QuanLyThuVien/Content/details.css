@@ -6,12 +6,15 @@
     overflow: hidden;
     width: 100%;
     height: 100%;
-    transform: scale(0);
     -webkit-transform: scale(0);
+    -moz-transform: scale(0);
+    -ms-transform: scale(0);
+    -o-transform: scale(0);
+    transform: scale(0);
     transition: .3s ease;
     z-index: 1;
 }
-.details {
+.container-show-details {
     background-color: white;
     position: absolute;
     border: 1px solid black;
@@ -25,7 +28,7 @@
 }
 
 @media screen and (min-width: 768px) {
-    .div-details {
+    .container-show-details {
         width: 50%;
         left: 25%;
     }

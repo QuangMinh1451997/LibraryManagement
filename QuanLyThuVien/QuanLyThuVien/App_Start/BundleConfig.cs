@@ -31,6 +31,7 @@ namespace QuanLyThuVien
                       "~/Content/header.css",
                       "~/Content/navigation.css",
                        "~/Content/login.css",
+                       "~/Content/details.css",
                        "~/Content/main.css"
                       ));
         }

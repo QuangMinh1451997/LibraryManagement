@@ -11,7 +11,11 @@ namespace Model.EF
     {
         public int EmployeeID { get; set; }
 
+        public int PermissionID { get; set; }
+
         public virtual Account Account { get; set; }
+
+        public virtual Permission Permission { get; set; }
 
     }
 }

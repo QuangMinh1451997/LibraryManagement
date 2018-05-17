@@ -14,10 +14,16 @@ namespace QuanLyThuVien
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "User",
+                name: "UserDetails",
                 url: "User/{action}/{id}",
                 defaults: new { controller = "User", action = "Details", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+               name: "UserChangePassword",
+               url: "User/{action}/{id}",
+               defaults: new { controller = "User", action = "ChangePassword", id = UrlParameter.Optional }
+           );
 
             routes.MapRoute(
                 name: "Default",

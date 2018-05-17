@@ -13,8 +13,8 @@
 </head>
 <body>
     @{ var user = (Model.ViewModels.EmployeeLogin)Session[QuanLyThuVien.Common.CommonSession.USER_SESSION];}
-    <div class="container-fluid">
-        <div class="container-details"><div class="details"></div></div>
+    <div class="container-details"><div class="container-show-details"></div></div>
+    <div class="container-fluid section">
         <div class="row row-header">
             @RenderPage("~/Views/Shared/_Header.cshtml", new { EmployeeID = user.EmployeeID })
         </div>
