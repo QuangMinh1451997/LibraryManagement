@@ -24,3 +24,17 @@ C:\Users\quang\OneDrive\Desktop\IT\Projects\QuanLyThuVien\Model\bin\Debug\Entity
 C:\Users\quang\OneDrive\Desktop\IT\Projects\QuanLyThuVien\Model\obj\Debug\Model.csproj.CopyComplete
 C:\Users\quang\OneDrive\Desktop\IT\Projects\QuanLyThuVien\Model\obj\Debug\Model.Migrations.init.resources
 C:\Users\quang\OneDrive\Desktop\IT\Projects\QuanLyThuVien\Model\obj\Debug\Model.csproj.GenerateResource.cache
+C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\bin\Debug\Model.dll.config
+C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\bin\Debug\Model.dll
+C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\bin\Debug\Model.pdb
+C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\bin\Debug\EntityFramework.dll
+C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\bin\Debug\EntityFramework.xml
+C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
+C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\obj\Debug\Model.csproj.CopyComplete
+C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\obj\Debug\Model.dll
+C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\obj\Debug\Model.pdb
+C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\obj\Debug\Model.Migrations.init.resources
+C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\obj\Debug\Model.csproj.GenerateResource.cache

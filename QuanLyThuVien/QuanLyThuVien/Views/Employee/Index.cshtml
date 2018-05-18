@@ -1,5 +1,9 @@
-﻿@model PagedList.IPagedList<Model.EF.Employee>
-@using PagedList.Mvc;
+﻿@*@model PagedList.IPagedList<Model.EF.Employee>
+    @using PagedList.Mvc;*@
+@model IEnumerable<Model.EF.Employee>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+
+
 @{
     ViewBag.Title = "Quản lý nhân viên";
     Layout = "~/Views/Shared/_FrameLayout.cshtml";
@@ -10,9 +14,9 @@
 <p>
     @Html.ActionLink("Thêm nhân viên", "Create")
 </p>
-<div class="table-responsive div-body">
-
-    <table class="table-data-center table-image-50 table table-hover">
+@{ var user = (Model.ViewModels.EmployeeLogin)Session[QuanLyThuVien.Common.CommonSession.USER_SESSION]; }
+<div class="table-responsive">
+    <table id="table_id" class="display table-data-center table-bordered">
         <thead>
             <tr>
                 <th>Ảnh</th>
@@ -25,26 +29,34 @@
             </tr>
         </thead>
         <tbody>
-            @{
-                foreach (var item in Model)
+            @{foreach (var item in Model)
                 {
-                    <tr>
-                        <td><img src="~/Upload/Images/Employee/@item.UrlAvatar" height="50" width="50" /></td>
+                    <tr id="@item.EmployeeID">
+                        <td><img src="~/Upload/Images/Employee/@Html.Raw(item.UrlAvatar??"user.png")" height="50" width="50" /></td>
                         <td>@item.FullName</td>
                         <td>@item.BirthDay.ToString("dd/MM/yyyy")</td>
                         <td>@item.Address</td>
                         <td>@item.Phone</td>
-                        <td>@item.Account.Permission.PermissionName</td>
+                        <td>@item.Permission.PermissionName</td>
                         <td>
-                            @Html.ActionLink("Xem", "Details", "Employee", new { id = item.EmployeeID }, htmlAttributes: new { @class = "details", @at = item.EmployeeID })
-                            @Html.ActionLink("Sửa", "Edit", "Employee", new { id = item.EmployeeID }, null)
-                            @Html.ActionLink("Xóa", "delete", "Employee", new { id = item.EmployeeID }, htmlAttributes: new { @class = "link-delete", @at = "/NhanViens" })
+                            <button class="btn btn-info btn-details" data-url="/Employee/Details/@item.EmployeeID">Chi tiết</button>
+                            @Html.ActionLink("Sửa", "Edit", "Employee", new { id = item.EmployeeID }, new { @class = "btn btn-warning" })
+                            @if (user.EmployeeID != item.EmployeeID)
+                            {
+                                <button class="btn btn-danger btn-delete" data-url="/Employee/Delete/@item.EmployeeID">Xóa</button>
+                                <button class="btn btn-danger btn-restore-password" data-url="/Employee/RestorePassword/@item.EmployeeID">Khôi phục mật khẩu</button>
+                            }
                         </td>
                     </tr>
                 }
             }
         </tbody>
     </table>
-    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageNumber
-    @Html.PagedListPager(Model, page=> Url.Action("Index", new { page }))
 </div>
+
+@section scripts{
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script>
+        $('#table_id').DataTable();
+    </script>
+}

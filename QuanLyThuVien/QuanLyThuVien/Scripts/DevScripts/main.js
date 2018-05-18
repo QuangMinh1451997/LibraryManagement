@@ -2,6 +2,7 @@
 function ReadFile(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
+        console.log(reader);
         reader.onload = function (event) {
             $(".avatar").attr('src', event.target.result);
         };
@@ -18,7 +19,7 @@ function sentAjax(url, method, dataType, data, func) {
         error: function (xhr, ajaxOptions, thrownError) {
             alert("Vui lòng thử lại!!");
         }
-        
+
     });
 }
 $(document).ready(function () {
@@ -33,13 +34,62 @@ $(document).ready(function () {
             $(".form").submit();
         }
     });
+    // Click btn-delete
+    $(".btn-delete").click(function (event) {
+        var url = $(this).attr('data-url');
+        var row = $(this).closest("tr");
+        var userResult = confirm("Bạn muốn xóa ?");
+        if (userResult) {
+            sentAjax(url, 'post', 'text', {}, function (serverResult) {
+                serverResult = parseInt(serverResult);
+                if (serverResult === -1) {
+                    alert("Bản ghi này không tồn tại !!!");
+                }
+                else if (serverResult === -2) {
+                    alert("Có lỗi khi xóa bản ghi. Vui lòng thữ lại");
+                }
+                else if (serverResult > 0) {
+                    row.remove();
+                    alert("Xóa thành công !!!");
+                }
+            });
+        }
+    });
 
-    $(".details").click(function (event) {
-        event.preventDefault();
-        var id = $(this).attr("at");
-        console.log(id);
-        sentAjax("/Employee/Details", "get", "html", {id: id}, function (result) {
-            console.log(result);
+    // click btn-restore-password
+    $(".btn-restore-password").click(function () {
+        var url = $(this).attr('data-url');
+        var userResult = confirm("Bạn muốn khôi phục mật khẩu thành mặc định (ngày sinh của nhân vien)??");
+        if (userResult === true) {
+            sentAjax(url, 'post', 'text', {}, function (serverResult) {
+                serverResult = parseInt(serverResult);
+                if (serverResult === -2) {
+                    alert("Có lỗi xãy ra!! Vui lòng thữ lại hoặc tải lại trang");
+                }
+                else if (serverResult === -1) {
+                    alert("Nhân viên không tồn tại hoặc đã bị xóa!! Vui lòng thữ lại hoặc tải lại trang");
+                }
+                else if (serverResult > 0) {
+                    alert("Khôi phục mật khẩu thành công!");
+                }
+            });
+        }
+    });
+    // show detail one object
+    $(".container-details").click(function () {
+        $(".container-details").css("transform", "scale(0)");
+        $(".section").css("opacity", "1");
+        $(".container-show-details").html('');
+    });
+    $(".container-show-details").click(function (e) {
+        e.stopPropagation();
+    });
+    $(".btn-details").click(function (event) {
+        var url = $(this).attr("data-url");
+        $(".section").css("opacity", "0.3");
+        $(".container-details").css("transform", "scale(1)");
+        sentAjax(url, "get", "html", {}, function (result) {
+            $(".container-show-details").html(result);
         });
     });
 });

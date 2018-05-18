@@ -11,6 +11,7 @@
                             <a href="javascript:void(0)" class="dropbtn"> Tài khoản <i class="fa fa-caret-down" style="font-size:18px;color:white"></i></a>
                             <div class="dropdown-content">
                                 @Html.ActionLink("Thông tin", "Details", "User", new { }, new { })
+                                @Html.ActionLink("Đổi mật khẩu", "ChangePassword", "User", new { id = Page.EmployeeID }, new { })
                                 @Html.ActionLink("Đăng xuất", "Logout", "User", new { }, new { })
                             </div>
                         </li>

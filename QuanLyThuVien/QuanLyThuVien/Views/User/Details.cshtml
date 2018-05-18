@@ -59,7 +59,7 @@
                                 @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
                             </div>
                         </td>
-                        <td></td>
+                        <td>@Html.ActionLink("Đổi mật khẩu", "ChangePassword", "User")</td>
                     </tr>
                 </tbody>
             </table>

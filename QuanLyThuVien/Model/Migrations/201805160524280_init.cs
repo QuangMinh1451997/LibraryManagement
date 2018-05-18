@@ -14,7 +14,6 @@ namespace Model.Migrations
                         EmployeeID = c.Int(nullable: false),
                         Username = c.String(maxLength: 30),
                         Password = c.String(maxLength: 250),
-                        PermissionID = c.Int(nullable: false),
                         CreateBy = c.String(maxLength: 30),
                         CreateDate = c.DateTime(nullable: false),
                         EditBy = c.String(maxLength: 30),
@@ -23,16 +22,15 @@ namespace Model.Migrations
                     })
                 .PrimaryKey(t => t.EmployeeID)
                 .ForeignKey("dbo.Employees", t => t.EmployeeID)
-                .ForeignKey("dbo.Permissions", t => t.PermissionID, cascadeDelete: true)
                 .Index(t => t.EmployeeID)
-                .Index(t => t.Username, unique: true)
-                .Index(t => t.PermissionID);
+                .Index(t => t.Username, unique: true);
             
             CreateTable(
                 "dbo.Employees",
                 c => new
                     {
                         EmployeeID = c.Int(nullable: false, identity: true),
+                        PermissionID = c.Int(nullable: false),
                         FirstName = c.String(nullable: false, maxLength: 100),
                         LastName = c.String(nullable: false, maxLength: 50),
                         BirthDay = c.DateTime(nullable: false),
@@ -46,7 +44,9 @@ namespace Model.Migrations
                         EditDate = c.DateTime(nullable: false),
                         Deleted = c.Boolean(nullable: false),
                     })
-                .PrimaryKey(t => t.EmployeeID);
+                .PrimaryKey(t => t.EmployeeID)
+                .ForeignKey("dbo.Permissions", t => t.PermissionID, cascadeDelete: true)
+                .Index(t => t.PermissionID);
             
             CreateTable(
                 "dbo.Permissions",
@@ -175,14 +175,14 @@ namespace Model.Migrations
             DropForeignKey("dbo.HireDetails", "BookID", "dbo.Books");
             DropForeignKey("dbo.BookTypes", "SpecializedID", "dbo.Specializeds");
             DropForeignKey("dbo.Books", "BookTypeID", "dbo.BookTypes");
-            DropForeignKey("dbo.Accounts", "PermissionID", "dbo.Permissions");
             DropForeignKey("dbo.Accounts", "EmployeeID", "dbo.Employees");
+            DropForeignKey("dbo.Employees", "PermissionID", "dbo.Permissions");
             DropIndex("dbo.HireDetails", new[] { "EmployeeID" });
             DropIndex("dbo.HireDetails", new[] { "MemberID" });
             DropIndex("dbo.HireDetails", new[] { "BookID" });
             DropIndex("dbo.BookTypes", new[] { "SpecializedID" });
             DropIndex("dbo.Books", new[] { "BookTypeID" });
-            DropIndex("dbo.Accounts", new[] { "PermissionID" });
+            DropIndex("dbo.Employees", new[] { "PermissionID" });
             DropIndex("dbo.Accounts", new[] { "Username" });
             DropIndex("dbo.Accounts", new[] { "EmployeeID" });
             DropTable("dbo.Members");

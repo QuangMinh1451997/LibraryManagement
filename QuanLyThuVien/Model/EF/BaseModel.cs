@@ -27,7 +27,6 @@ namespace Model.EF
 
         public BaseModel()
         {
-            Deleted = false;
         }
     }
 }
