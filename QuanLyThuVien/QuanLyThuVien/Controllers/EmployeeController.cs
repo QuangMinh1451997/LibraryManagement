@@ -33,13 +33,26 @@ namespace QuanLyThuVien.Controllers
         }
 
         // GET: NhanVien/Details/5
+        [HttpGet]
         public ActionResult Details(int id)
         {
             var dao = new EmployeeDAO();
             var model = dao.GetEmployeeByID(id);
             if (model == null)
                 return HttpNotFound();
-            return PartialView("_Details", model);
+            if(Request.IsAjaxRequest())
+                return PartialView("_Details", model);
+            return HttpNotFound();
+        }
+
+        // GET: NhanVien/Details/5
+        public ActionResult DetailsByUsername(string username)
+        {
+            var dao = new EmployeeDAO();
+            var model = dao.GetEmployeeByUsername(username);
+            if (model == null)
+                return HttpNotFound();
+            return View("Details", model);
         }
 
         // GET: NhanVien/Create
@@ -57,20 +70,24 @@ namespace QuanLyThuVien.Controllers
         {
             try
             {
+                if (UrlAvatar != null && Helper.IsImage(Path.GetExtension(UrlAvatar.FileName)) == false)
+                    ModelState.AddModelError("", "Tệp tin hình ảnh phải có phần mở rộng là : .jpeg, .png, .jpg");
                 if (ModelState.IsValid)
                 {
+                    var dao = new EmployeeDAO();
                     string path = null;
                     var user = (EmployeeLogin)Session[Common.CommonSession.USER_SESSION];
+                    var nextID = dao.GetNextID();
                     if (UrlAvatar != null && UrlAvatar.ContentLength > 0)
                     {
-                        newEmployee.UrlAvatar = newEmployee.EmployeeID + Path.GetExtension(UrlAvatar.FileName);
+                        newEmployee.UrlAvatar = nextID + Path.GetExtension(UrlAvatar.FileName);
                         path = Path.Combine(Server.MapPath("~/Upload/Images/Employee"), newEmployee.UrlAvatar);
                     }
                     else
                     {
                         newEmployee.UrlAvatar = "user.png";
                     }
-                    var result = new EmployeeDAO().Insert(newEmployee, user.Username);
+                    var result = dao.Insert(newEmployee, user.Username);
                     if (result > 0)
                     {
                         if(path!=null)
@@ -98,7 +115,8 @@ namespace QuanLyThuVien.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             var dao = new EmployeeDAO();
             var employeeEdit = dao.GetEmployeeByID(id.Value);
-
+            if (employeeEdit == null)
+                return HttpNotFound();
             CreateSelectList();
             return View(employeeEdit);
         }
@@ -110,6 +128,8 @@ namespace QuanLyThuVien.Controllers
         {
             try
             {
+                if (UrlAvatar != null && Helper.IsImage(Path.GetExtension(UrlAvatar.FileName)) == false)
+                    ModelState.AddModelError("", "Tệp tin hình ảnh phải có phần mở rộng là : .jpeg, .png, .jpg");
                 if (ModelState.IsValid)
                 {
                     var dao = new EmployeeDAO();

@@ -490,3 +490,4 @@ C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Quan
 C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\QuanLyThuVien\obj\Debug\QuanLyThuVien.csproj.CopyComplete
 C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\QuanLyThuVien\obj\Debug\QuanLyThuVien.dll
 C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\QuanLyThuVien\obj\Debug\QuanLyThuVien.pdb
+C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\QuanLyThuVien\bin\CKFinder.dll

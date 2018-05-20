@@ -8,10 +8,10 @@ namespace QuanLyThuVien.Models
 {
     public class LoginModel
     {
-        [Required]
+        [Required(ErrorMessage = "Nhập tên tài khoản")]
         public string Username { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Nhập mật khẩu")]
         public string Password { get; set; }
 
         public LoginModel()

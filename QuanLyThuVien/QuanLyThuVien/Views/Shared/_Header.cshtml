@@ -15,7 +15,13 @@
                                 @Html.ActionLink("Đăng xuất", "Logout", "User", new { }, new { })
                             </div>
                         </li>
-                        <li><a href="#news"><i class="fa fa-cog fa-spin" style="font-size:15px"></i> Thiết lập</a></li>
+                        @if (Page.QuanLy == true)
+                        {
+                            <li>
+                                @Html.ActionLink("Thiết lập", "Index", "Setting", new { }, new { @class = "" })
+                            </li>
+                        }
+
                     </ul>
                 </div>
             </div>

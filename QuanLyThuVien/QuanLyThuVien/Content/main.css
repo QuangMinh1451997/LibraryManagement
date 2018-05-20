@@ -29,21 +29,23 @@ body {
 }
 
 @media screen and (min-width: 768px) {
-    html, body, body > .container-fluid {
+    html, body {
         height: 100%;
     }
-    .row-header {
-        height: 4%;
+
+    body > .container-fluid {
+        height: 99.9%;
     }
 
     .row-section {
         height: 80%;
-    }
-    .col-content {
-        height: 100%;
         overflow: auto;
     }
-    .col-navigation {
-        height: 100%;
+
+    .col-content {
+        overflow: auto;
+    }
+
+    .row-footer {
     }
 }

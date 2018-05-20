@@ -1,0 +1,59 @@
+﻿@*@model PagedList.IPagedList<Model.EF.Employee>
+    @using PagedList.Mvc;*@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+
+
+@{
+    ViewBag.Title = "Thiết lập";
+    Layout = "~/Views/Shared/_FrameLayout.cshtml";
+}
+@{ var user = (Model.ViewModels.EmployeeLogin)Session[QuanLyThuVien.Common.CommonSession.USER_SESSION]; }
+<div class="row">
+    @{Html.RenderAction("IndexHireTime");}
+</div>
+<div class="row">
+    @{Html.RenderAction("IndexPermission");}
+</div>
+<hr />
+@section scripts{
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_id1').DataTable();
+            $('#table_id2').DataTable();
+
+            $(".btn-active").click(function () {
+                var tdBtn = $(this);
+                var tdStatus = $(this).closest('td').prev();
+                var url = tdBtn.attr('data-url');
+                console.log(tdStatus.html());
+                var userResult = confirm("Bạn muốn thay đổ ?");
+                if (userResult) {
+                    sentAjax(url, 'post', 'text', {}, function (serverResult) {
+                        serverResult = parseInt(serverResult);
+                        console.log(serverResult);
+                        if (serverResult === -1) {
+                            alert("Bản ghi này không tồn tại !!!");
+                        }
+                        else if (serverResult === -2) {
+                            alert("Có lỗi khi xóa bản ghi. Vui lòng thữ lại");
+                        }
+                        else if (serverResult > 0) {
+                            if (serverResult === 1) {
+                                tdStatus.html("Chưa kích hoạt");
+                                tdStatus.css("color","red");
+                                tdBtn.html("Kích hoạt");
+                            }
+                            else if (serverResult === 2) {
+                                tdStatus.html("Đang kích hoạt");
+                                tdStatus.css("color", "blue");
+                                tdBtn.html("Hủy kích hoạt");
+                            }
+                            alert("Thay đổi thành công !!!");
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

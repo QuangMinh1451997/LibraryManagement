@@ -38,7 +38,7 @@ $(document).ready(function () {
     $(".btn-delete").click(function (event) {
         var url = $(this).attr('data-url');
         var row = $(this).closest("tr");
-        var userResult = confirm("Bạn muốn xóa ?");
+        var userResult = confirm("Xóa bản ghi sẽ xóa các thông tin liên quan. Bạn có muốn xóa ?");
         if (userResult) {
             sentAjax(url, 'post', 'text', {}, function (serverResult) {
                 serverResult = parseInt(serverResult);
@@ -86,9 +86,9 @@ $(document).ready(function () {
     });
     $(".btn-details").click(function (event) {
         var url = $(this).attr("data-url");
-        $(".section").css("opacity", "0.3");
-        $(".container-details").css("transform", "scale(1)");
         sentAjax(url, "get", "html", {}, function (result) {
+            $(".section").css("opacity", "0.3");
+            $(".container-details").css("transform", "scale(1)");
             $(".container-show-details").html(result);
         });
     });

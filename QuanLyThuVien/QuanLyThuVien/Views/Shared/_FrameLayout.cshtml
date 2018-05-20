@@ -16,7 +16,7 @@
     <div class="container-details"><div class="container-show-details"></div></div>
     <div class="container-fluid section">
         <div class="row row-header">
-            @RenderPage("~/Views/Shared/_Header.cshtml", new { EmployeeID = user.EmployeeID })
+            @RenderPage("~/Views/Shared/_Header.cshtml", new { EmployeeID = user.EmployeeID, QuanLy = user.QuanLy })
         </div>
 
         <div class="row row-section">
@@ -35,11 +35,11 @@
                 @RenderBody()
                 @if (user.QuanLy)
                 {
-                    <p>@Html.ActionLink("Quay lại", "Index", "Employee")</p>
+                    <p>@Html.ActionLink("Trang chính", "Index", "Employee")</p>
                 }
                 else if (user.ThuThu)
                 {
-                    <p>@Html.ActionLink("Quay lại", "Index", "Home")</p>
+                    <p>@Html.ActionLink("Trang chính", "Index", "Book")</p>
                 }
 
             </div>

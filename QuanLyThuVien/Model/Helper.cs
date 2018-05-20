@@ -1,6 +1,7 @@
 ﻿using Model.EF;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,11 @@ namespace Model
         {
             model.EditDate = DateTime.Today;
             model.EditBy = username;
+        }
+
+        public static int GetNextID(DbContext db, string tableName)
+        {
+            return Convert.ToInt32(db.Database.SqlQuery<decimal>("SELECT IDENT_CURRENT('"+tableName+"')").FirstOrDefault()) + 1;
         }
     }
 }

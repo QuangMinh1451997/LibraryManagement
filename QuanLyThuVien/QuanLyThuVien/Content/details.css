@@ -22,7 +22,7 @@
     width: 80%;
     top: 15%;
     left: 10%;
-    max-height: 800px;
+    max-height: 600px;
     overflow: auto;
     z-index: 2;
 }

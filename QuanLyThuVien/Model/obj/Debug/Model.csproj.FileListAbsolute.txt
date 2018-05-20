@@ -38,3 +38,9 @@ C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Mode
 C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\obj\Debug\Model.pdb
 C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\obj\Debug\Model.Migrations.init.resources
 C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\obj\Debug\Model.csproj.GenerateResource.cache
+C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\obj\Debug\Model.Migrations.addnewcolunminbooktype.resources
+C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\obj\Debug\Model.Migrations.addrequiredforproperties.resources
+C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\obj\Debug\Model.Migrations.adduniqueforStudentCodeandBookCode.resources
+C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\obj\Debug\Model.Migrations.addStatuspropertyforhiredetails.resources
+C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\obj\Debug\Model.Migrations.edithiredetailsandaddhiretime.resources
+C:\Users\quang\OneDrive\Desktop\IT\Projects\LibraryManagement\QuanLyThuVien\Model\obj\Debug\Model.Migrations.validateinfo.resources

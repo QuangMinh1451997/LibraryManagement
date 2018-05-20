@@ -1,0 +1,103 @@
+﻿@model QuanLyThuVien.Models.BookTypeModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_FrameLayout.cshtml";
+}
+
+<h2>Thêm đầu sách</h2>
+
+@using (Html.BeginForm("Create", "BookType", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form" }))
+{
+    <h2>Thông tin</h2>
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.BookTypeID)
+    <div class="row">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </div>
+    <hr />
+    <div class="table-responsive row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-2" style="padding: 15px; overflow:hidden">
+                    <img src="~/Upload/Images/BookType/default.png" class="avatar img-center-in-div" height="100" width="100" />
+                    <br />
+                    <input type="file" name="UrlImage" accept="image/jpeg, image/png" onchange="ReadFile(this);" />
+                </div>
+                <div class="col-sm-10">
+                    <table class="hover-td table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Tên đầu sách: </label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.BookTypeName, new { htmlattributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.BookTypeName, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Nhà xuất bản: </label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.PublishingHouse, new { htmlattributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.PublishingHouse, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Số trang: </label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.NumberOfPage, new { htmlattributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.NumberOfPage, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Kích thước: </label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.Size, new { htmlattributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Size, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Tác giả: </label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.Author, new { htmlattributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Author, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Chuyên nghành: </label>
+                                    <div class="col-sm-9">
+                                        @Html.DropDownListFor(model => model.SpecializedID, (SelectList)ViewBag.SeListSpecialized, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.SpecializedID, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <label class="control-label">Mô tả: </label>
+                @Html.TextAreaFor(model => model.Description, new { @class = "form-control", @id = "description", @style = "height: 500;" })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+            <div><input class="btn btn-primary button-250" id="btn-save" type="submit" value="Lưu" /></div>
+        </div>
+    </div>
+    <hr />
+    @Html.ActionLink("Quay lại", "Index");
+    <hr />
+}
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Assets/plugin/ckfinder/ckfinder.js"></script>
+    <script src="~/Assets/plugin/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace("description");
+    </script>
+}
+

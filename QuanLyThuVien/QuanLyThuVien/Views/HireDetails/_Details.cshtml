@@ -1,0 +1,73 @@
+﻿@model Model.EF.HireDetail
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            <td><img src="~/Upload/Images/BookType/@Model.Book.BookType.UrlImage" class="img-center-in-div" height="100" width="100" /></td>
+        </tr>
+        <tr>
+            <td class="form-group">
+                <label class="control-label col-md-5">Mã phiếu: </label>
+                <label class="control-label col-md-7">@Model.HireDetailID</label>
+            </td>
+            <td class="form-group">
+                <label class="control-label col-md-5">Mã sách: </label>
+                <label class="control-label col-md-7">@Model.Book.BookCode</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="form-group">
+                <label class="control-label col-md-5">Tên sách: </label>
+                <label class="control-label col-md-7">@Model.Book.BookType.BookTypeName</label>
+            </td>
+            <td class="form-group">
+                <label class="control-label col-md-5">Tên thành viên: </label>
+                <label class="control-label col-md-7">@Model.Member.FullName</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="control-label col-md-5">Địa chỉ: </label>
+                <label class="control-label col-md-7">@Model.Member.Address</label>
+            </td>
+            <td class="form-group">
+                <label class="control-label col-md-5">Số điện thoại: </label>
+                <label class="control-label col-md-7">@Model.Member.Phone</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="control-label col-md-5">Ngày mượn: </label>
+                <label class="control-label col-md-7">@Model.HireDate</label>
+            </td>
+            <td class="form-group">
+                <label class="control-label col-md-5">Ngày hết hạn: </label>
+                <label class="control-label col-md-7">@Model.HireDate.AddDays(Model.HireTime.NumberOfWeek * 7).ToString("dd/MM/yyyy")</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label class="control-label col-md-5">Tình trang: </label>
+                @{
+                    string textStatus = "";
+                    string textColor = "blue";
+                    if (Model.Status == 0)
+                    {
+                        textStatus = "Đã trả";
+                    }
+                    else if (Model.Status == 1)
+                    {
+                        textStatus = "Đang mượn";
+                    }
+                    else if (Model.Status == 2)
+                    {
+                        textStatus = "Hết hạn";
+                        textColor = "red";
+                    }
+                }
+            <label class="control-label col-md-7" style="color:@textColor">@textStatus</label>
+            </td>
+            <td class="form-group"></td>
+        </tr>
+    </tbody>
+</table>

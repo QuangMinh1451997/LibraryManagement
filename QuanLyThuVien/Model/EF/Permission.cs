@@ -12,6 +12,8 @@ namespace Model.EF
         public int PermissionID { get; set; }
 
         [StringLength(250)]
+        [MinLength(3,ErrorMessage ="Tên quyền phải có ít nhất 3 ký tự")]
+        [Required(ErrorMessage = "Vui lòng nhập")]
         public string PermissionName { get; set; }
 
         public bool QuanLy { get; set; }

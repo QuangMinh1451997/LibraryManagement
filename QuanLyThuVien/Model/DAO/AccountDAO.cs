@@ -32,11 +32,12 @@ namespace Model.DAO
                 var user = (from ac in db.Accounts
                             from em in db.Employees
                            from p in db.Permissions
-                           where ac.Username.CompareTo(username) == 0 && ac.EmployeeID == em.EmployeeID && em.PermissionID == p.PermissionID
+                           where ac.Username.CompareTo(username) == 0 && ac.EmployeeID == em.EmployeeID && em.PermissionID == p.PermissionID && ac.Deleted==false
                             select new EmployeeLogin
                             {
                                 EmployeeID = ac.EmployeeID,
                                 Username = ac.Username,
+                                PermissionID = p.PermissionID,
                                 PermissionName = p.PermissionName,
                                 QuanLy = p.QuanLy,
                                 ThuThu = p.ThuThu
@@ -48,10 +49,10 @@ namespace Model.DAO
 
         public int ChangePassword(int id, string username, string oldPassword, string password)
         {
-            var accountUpdate = db.Accounts.Find(id);
+            var accountUpdate = db.Accounts.SingleOrDefault(ac => ac.EmployeeID == id && ac.Deleted == false);
             if (accountUpdate == null)
                 return -1;
-            if (HashMd5(oldPassword) != accountUpdate.Password)
+            if (HashMd5(oldPassword) != accountUpdate.Password.ToLower())
                 return -2;
 
             accountUpdate.Password = HashMd5(password);
@@ -64,7 +65,7 @@ namespace Model.DAO
 
         public int RestorePassword(int id, string username)
         {
-            var employee = db.Employees.Find(id);
+            var employee = db.Employees.SingleOrDefault(em => em.EmployeeID == id && em.Deleted == false);
             if (employee == null)
                 return -1;
             var defaultPasswrod = HashMd5(CreatePasswordDefault(employee.BirthDay));

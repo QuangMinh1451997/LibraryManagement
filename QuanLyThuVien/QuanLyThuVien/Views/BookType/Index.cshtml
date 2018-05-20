@@ -1,0 +1,61 @@
+﻿@*@model PagedList.IPagedList<Model.EF.Employee>
+    @using PagedList.Mvc;*@
+@model IEnumerable<Model.EF.BookType>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+
+
+@{
+    ViewBag.Title = "Quản lý dầu sách";
+    Layout = "~/Views/Shared/_FrameLayout.cshtml";
+}
+
+<h2>Danh sách dầu sách</h2>
+
+<p>
+    @Html.ActionLink("Thêm đầu sách", "Create", new { }, new { @class = "btn btn-primary" })
+</p>
+@{ var user = (Model.ViewModels.EmployeeLogin)Session[QuanLyThuVien.Common.CommonSession.USER_SESSION]; }
+<div class="table-responsive">
+    <table id="table_id" class="display table-data-center table-bordered">
+        <thead>
+            <tr>
+                <td>Hình ảnh</td>
+                <th>Tên dầu sách</th>
+                <th>Nhà xuất bản</th>
+                <th>Số trang</th>
+                <th>Kích thước</th>
+                <th>Tác giả</th>
+                <th>Số lượng</th>
+                <th>Chuyên nghành</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{foreach (var item in Model)
+                {
+            <tr id="@item.BookTypeID">
+                <td><img src="~/Upload/Images/BookType/@Html.Raw(item.UrlImage??"default.png")" height="50" width="50" /></td>
+                <td>@item.BookTypeName</td>
+                <td>@item.PublishingHouse</td>
+                <td>@item.NumberOfPage</td>
+                <td>@item.Size</td>
+                <td>@item.Author</td>
+                <td>@item.Quantity</td>
+                <td>@item.Specialized.SpecializedName</td>
+                <td>
+                    <button class="btn btn-info btn-details" data-url="/BookType/Details/@item.BookTypeID">Chi tiết</button>
+                    @Html.ActionLink("Sửa", "Edit", "BookType", new { id = item.BookTypeID }, new { @class = "btn btn-warning" })
+                    <button class="btn btn-danger btn-delete" data-url="/BookType/Delete/@item.BookTypeID">Xóa</button>
+                </td>
+            </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script>
+        $('#table_id').DataTable();
+    </script>
+}

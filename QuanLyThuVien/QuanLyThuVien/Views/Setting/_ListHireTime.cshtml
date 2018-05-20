@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Model.EF.HireTime>
+
+<h2>Danh sách thời gian thuê</h2>
+
+<p>
+    @Html.ActionLink("Thêm thời gian thuê", "Create", new { }, new { @class = "btn btn-primary" })
+</p>
+<div class="table-responsive">
+    <table id="table_id2" class="display table-data-center table-bordered">
+        <thead>
+            <tr>
+                <th>Thời gian thuê</th>
+                <th>Trạng thái</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{foreach (var item in Model)
+                {
+                    <tr id="@item.HireTimeID">
+                        <td>@item.NumberOfWeek Tuần</td>
+                        <td class="status" style="color:@Html.Raw((item.Status)? "red" : "blue")" >@Html.Raw((item.Status)? "Chưa kích hoạt" : "Đang kích hoạt")</td>
+                        <td><button class="btn btn-primary btn-active" type="button" data-url="/HireTime/Edit/@item.HireTimeID">@Html.Raw((item.Status) ? "Kích hoạt" : "Hủy kích hoạt")</button></td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+

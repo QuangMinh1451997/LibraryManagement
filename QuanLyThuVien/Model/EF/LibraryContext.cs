@@ -19,7 +19,7 @@ namespace Model.EF
         public DbSet<Book> Books { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<HireDetail> HireDetails { get; set; }
-
+        public DbSet<HireTime> HireTimes { get; set; }
         public LibraryContext() : base()
         {
 

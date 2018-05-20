@@ -12,6 +12,8 @@ namespace Model.EF
         public int SpecializedID { get; set; }
 
         [StringLength(250)]
+        [MinLength(5, ErrorMessage = "Vui lòng nhập hơn 5 ký tự")]
+        [Required(ErrorMessage = "Vui lòng nhập tên chuyên nghành")]
         public string SpecializedName { get; set; }
 
         [StringLength(500)]

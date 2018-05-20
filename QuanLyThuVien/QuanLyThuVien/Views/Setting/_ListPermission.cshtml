@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Model.EF.Permission>
+
+<h2>Danh sách chức vụ</h2>
+<div class="table-responsive">
+    <table id="table_id1" class="display table-data-center table-bordered">
+        <thead>
+            <tr>
+                <th>Tên chức vụ</th>
+                <th>Thủ thư</th>
+                <th>Quản lý</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{foreach (var item in Model)
+                {
+                    <tr id="@item.PermissionID">
+                        <td>@item.PermissionName</td>
+                        <td>@Html.Raw((item.ThuThu) ? "Có" : "Không")</td>
+                        <td>@Html.Raw((item.QuanLy) ? "Có" : "Không")</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+

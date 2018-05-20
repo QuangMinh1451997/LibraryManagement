@@ -17,9 +17,11 @@ namespace Model.EF
 
         public DateTime HireDate { get; set; }
 
-        public DateTime ExpirationDate { get; set; }
+        public int HireTimeID { get; set; }
 
         public int EmployeeID { get; set; }
+
+        public int Status { get; set; }
 
         public float Penalty { get; set; }
 
@@ -28,6 +30,8 @@ namespace Model.EF
         public virtual Member Member { get; set; }
 
         public virtual Employee Employee { get; set; }
+
+        public virtual HireTime HireTime { get; set; }
 
     }
 }

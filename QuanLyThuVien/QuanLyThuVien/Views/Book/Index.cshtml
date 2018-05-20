@@ -1,0 +1,66 @@
+﻿@*@model PagedList.IPagedList<Model.EF.Employee>
+    @using PagedList.Mvc;*@
+@model IEnumerable<Model.EF.Book>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+
+
+@{
+    ViewBag.Title = "Quản lý sách";
+    Layout = "~/Views/Shared/_FrameLayout.cshtml";
+}
+@{ var user = (Model.ViewModels.EmployeeLogin)Session[QuanLyThuVien.Common.CommonSession.USER_SESSION]; }
+<h2>Danh sách sách</h2>
+@if (user.ThuThu)
+{
+    <p>
+        @Html.ActionLink("Thêm sách", "Create", new { }, new { @class = "btn btn-primary" })
+    </p>
+}
+<div class="table-responsive">
+    <table id="table_id" class="display table-data-center table-bordered">
+        <thead>
+            <tr>
+                <td>Hình ảnh</td>
+                <th>Tên sách</th>
+                <th>Mã sách</th>
+                <th>Tính trạng</th>
+                <th>Tác giả</th>
+                <th>Chuyên nghành</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{foreach (var item in Model)
+                {
+                    <tr id="@item.BookID">
+                        <td><img src="~/Upload/Images/BookType/@Html.Raw(item.BookType.UrlImage??"default.png")" height="50" width="50" /></td>
+                        <td>@item.BookType.BookTypeName</td>
+                        <td>@item.BookCode</td>
+                        <td style="color: @Html.Raw((item.Status)? "red" : "blue")">@Html.Raw((item.Status) ? "Đang mượn" : "Chưa mượn")</td>
+                        <td>@item.BookType.Author</td>
+                        <td>@item.BookType.Specialized.SpecializedName</td>
+                        <td>
+                            <button class="btn btn-info btn-details" data-url="/Book/Details/@item.BookID">Chi tiết</button>
+                            @if (user.ThuThu)
+                            {
+                                if (item.Status == false)
+                                {
+                                    <a href="/HireDetails/Create/@item.BookID" class="btn btn-primary">@Html.Raw((item.Status) ? "Trả sách" : "Mượn sách")</a>
+                                }
+                                @Html.ActionLink("Sửa", "Edit", "Book", new { id = item.BookID }, new { @class = "btn btn-warning" })
+                                <button class="btn btn-danger btn-delete" data-url="/Book/Delete/@item.BookID">Xóa</button>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script>
+        $('#table_id').DataTable();
+    </script>
+}

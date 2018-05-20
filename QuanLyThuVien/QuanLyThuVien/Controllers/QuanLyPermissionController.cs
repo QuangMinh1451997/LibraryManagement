@@ -13,7 +13,8 @@ namespace QuanLyThuVien.Controllers
     {
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var actionName = filterContext.ActionDescriptor.ActionName;
+            var actionName = filterContext.ActionDescriptor.ActionName.ToLower();
+            
             var userLogin = (EmployeeLogin)Session[Common.CommonSession.USER_SESSION];
             if (userLogin == null)
             {
@@ -24,6 +25,7 @@ namespace QuanLyThuVien.Controllers
             {
                 filterContext.Result = new HttpUnauthorizedResult();
             }
+
             base.OnActionExecuting(filterContext);
         }
     }

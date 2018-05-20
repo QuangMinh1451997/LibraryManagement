@@ -12,7 +12,7 @@
 <h2>Danh sách nhân viên</h2>
 
 <p>
-    @Html.ActionLink("Thêm nhân viên", "Create")
+    @Html.ActionLink("Thêm nhân viên", "Create", new { }, new { @class = "btn btn-primary" })
 </p>
 @{ var user = (Model.ViewModels.EmployeeLogin)Session[QuanLyThuVien.Common.CommonSession.USER_SESSION]; }
 <div class="table-responsive">
@@ -25,6 +25,7 @@
                 <th>Địa chỉ</th>
                 <th>Số điện thoại</th>
                 <th>Vai trò</th>
+                <th>Tên tài khoản</th>
                 <th></th>
             </tr>
         </thead>
@@ -38,6 +39,7 @@
                         <td>@item.Address</td>
                         <td>@item.Phone</td>
                         <td>@item.Permission.PermissionName</td>
+                        <td>@item.Account.Username</td>
                         <td>
                             <button class="btn btn-info btn-details" data-url="/Employee/Details/@item.EmployeeID">Chi tiết</button>
                             @Html.ActionLink("Sửa", "Edit", "Employee", new { id = item.EmployeeID }, new { @class = "btn btn-warning" })

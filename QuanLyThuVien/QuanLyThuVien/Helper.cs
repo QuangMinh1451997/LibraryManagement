@@ -19,5 +19,11 @@ namespace QuanLyThuVien
             }
             return "";
         }
+
+        public static bool IsImage(string extension)
+        {
+            string[] imgExtension = { ".jpg", ".png", ".jpeg" };
+            return imgExtension.Contains(extension.ToLowerInvariant());
+        }
     }
 }

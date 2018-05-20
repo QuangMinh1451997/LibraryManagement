@@ -1,0 +1,51 @@
+﻿@model Model.EF.BookType
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            <td><img src="~/Upload/Images/BookType/@Model.UrlImage" class="img-center-in-div" height="100" width="100" /></td>
+        </tr>
+        <tr>
+            <td class="form-group">
+                <label class="control-label col-md-5">Tên đầu sách: </label>
+                <label class="control-label col-md-7">@Model.BookTypeName</label>
+            </td>
+            <td class="form-group">
+                <label class="control-label col-md-5">Nhà xuất bản: </label>
+                <label class="control-label col-md-7">@Model.PublishingHouse</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="form-group">
+                <label class="control-label col-md-5">Số trang: </label>
+                <label class="control-label col-md-7">@Model.NumberOfPage</label>
+            </td>
+            <td>
+                <label class="control-label col-md-5">Kích thước: </label>
+                <label class="control-label col-md-7">@Model.Size</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="form-group">
+                <label class="control-label col-md-5">Tác giả: </label>
+                <label class="control-label col-md-7">@Model.Author</label>
+            </td>
+            <td class="form-group">
+                <label class="control-label col-md-5">Số lượng: </label>
+                <label class="control-label col-md-7">@Model.Quantity</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="form-group">
+                <label class="control-label col-md-5">Chuyên nghành: </label>
+                <label class="control-label col-md-7">@Model.Specialized.SpecializedName</label>
+            </td>
+            <td class="form-group"></td>
+        </tr>
+    </tbody>
+</table>
+<div style="padding:10px">
+    <label class="control-label">Mô tả: </label>
+    <hr />
+    @Html.Raw(Model.Description)
+</div>

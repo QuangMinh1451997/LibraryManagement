@@ -48,7 +48,7 @@
             permissions.ForEach(p => context.Permissions.AddOrUpdate(p));
             context.SaveChanges();*/
 
-            var employees = new List<Employee>() {
+            /*var employees = new List<Employee>() {
                 new Employee()
                 {
                     FirstName = "Đinh Quang",
@@ -66,7 +66,7 @@
                 }
             };
             employees.ForEach(e => context.Employees.AddOrUpdate(em => em.Phone, e));
-            context.SaveChanges();
+            context.SaveChanges();*/
         }
     }
 }
