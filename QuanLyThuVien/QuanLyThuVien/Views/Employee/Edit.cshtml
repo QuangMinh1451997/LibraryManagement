@@ -8,10 +8,13 @@
 <h2>Sửa thông tin nhân viên</h2>
 
 @using (Html.BeginForm("Edit", "Employee", FormMethod.Post,
-                            new { enctype = "multipart/form-data", @class="form" }))
+                            new { enctype = "multipart/form-data", @class = "form" }))
 {
     @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </div>
+    <hr />
     <div class="table-responsive row">
         <div class="col-sm-2" style="padding: 15px; margin: 0 auto;">
             <img src="~/Upload/Images/Employee/@Html.Raw((Model.UrlAvatar)??"user.png")" class="avatar img-center-in-div" height="100" width="100" />
@@ -20,7 +23,7 @@
             <input type="hidden" value="@Model.EmployeeID" name="EmployeeID" />
         </div>
         <div class="col-sm-10">
-            <table class="hover-td table table-bordered col-sm-9">
+            <table class="hover-td table table-bordered">
                 <tbody>
                     <tr>
                         <td class="form-group">
@@ -79,8 +82,7 @@
                                 @Html.ValidationMessageFor(model => model.PermissionID, "", new { @class = "text-danger" })
                             </div>
                         </td>
-                        <td>
-                        </td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>

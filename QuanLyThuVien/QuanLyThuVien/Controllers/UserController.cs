@@ -112,11 +112,11 @@ namespace QuanLyThuVien.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var user = (EmployeeLogin)Session[Common.CommonSession.USER_SESSION];
-            var actionName = filterContext.ActionDescriptor.ActionName;
+            var actionName = filterContext.ActionDescriptor.ActionName.ToLower();
             if (user == null)
                 filterContext.Result = new RedirectToRouteResult(
                     new RouteValueDictionary(new { controller = "login", action = "index" }));
-            else if(actionName == "Details")
+            else if(actionName == "details")
             {
                 var paramID = filterContext.ActionParameters["id"];
                 // set id if id = null

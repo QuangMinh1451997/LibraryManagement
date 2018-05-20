@@ -1,0 +1,101 @@
+﻿@model Model.EF.Book
+
+@{
+
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_FrameLayout.cshtml";
+}
+
+<h2>Sửa sách</h2>
+
+@using (Html.BeginForm("Edit", "Book", FormMethod.Post, new { @class = "form" }))
+{
+    <h2>Thông tin</h2>
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.BookID)
+    <div class="row">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </div>
+    <hr />
+    <div class="table-responsive row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-2" style="padding: 15px; overflow:hidden">
+                    <img src="~/Upload/Images/BookType/default.png" class="avatar img-center-in-div" height="200" width="150" />
+                </div>
+                <div class="col-sm-10">
+                    <table class="hover-td table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Tên đầu sách: </label>
+                                    <div class="col-sm-9">
+                                        @Html.DropDownListFor(model => model.BookTypeID, (SelectList)ViewBag.SelListBookType, new { @class = "form-control", @id = "BookTypeID" })
+                                        @Html.ValidationMessageFor(model => model.BookType.BookTypeID, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                                <td class="form-group">
+                                    @Html.ActionLink("Thêm đầu sách mới", "Create", "BookType")
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Chuyên nghành: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" id="Specialized" disabled="disabled" />
+                                    </div>
+                                </td>
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Số lượng: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" id="Quantity" disabled="disabled" />
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr>
+
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Mã sách: </label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.BookCode, new { htmlattributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.BookCode, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div><input class="btn btn-primary button-250" id="btn-save" type="submit" value="Lưu" /></div>
+        </div>
+    </div>
+    <hr />
+    @Html.ActionLink("Quay lại", "Index");
+    <hr />
+}
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        function AjaxFunction(result) {
+            console.log(result);
+            $("#Specialized").val(result[0]["SpecializedName"])
+            $("#Quantity").val(result[0]["Quantity"])
+            $(".avatar").attr("src", "/Upload/Images/BookType/" + result[0]["UrlImage"]);
+        }
+        $(document).ready(function () {
+            var idCurr = $("#BookTypeID").val();
+            sentAjax("/BookType/GetData", 'get', "json", { id: idCurr }, AjaxFunction);
+            $("#BookTypeID").on('change', function () {
+                var id = parseInt($(this).val());
+                sentAjax("/BookType/GetData", 'get', "json", { id: id }, function (result) {
+                    console.log(result);
+                    $("#Specialized").val(result[0]["SpecializedName"])
+                    $("#Quantity").val(result[0]["Quantity"])
+                    $(".avatar").attr("src", "/Upload/Images/BookType/" + result[0]["UrlImage"]);
+                });
+            });
+        });
+    </script>
+}
+

@@ -1,0 +1,114 @@
+﻿@model Model.EF.Book
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_FrameLayout.cshtml";
+}
+
+<h2>Thêm sách</h2>
+
+@using (Html.BeginForm("HireBook", "Book", FormMethod.Post, new { @class = "form" }))
+{
+    <h2>Thông tin</h2>
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.BookID)
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <hr />
+    <div class="table-responsive row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-6">
+                    <table class="hover-td table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Mã sách: </label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.BookCode, new { htmlattributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.BookCode, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Tên đầu sách: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" id="BookTypeName" readonly="readonly" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Chuyên nghành: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" id="SpecializedName" readonly="readonly" />
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm-6">
+                    <table class="hover-td table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Mã sinh viên: </label>
+                                    <div class="col-sm-9">
+                                        @Html.EditorFor(model => model.BookCode, new { htmlattributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.BookCode, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Tên đầu sách: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" id="BookTypeName" readonly="readonly" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Chuyên nghành: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" id="SpecializedName" readonly="readonly" />
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div><input class="btn btn-primary button-250" id="btn-save" type="submit" value="Lưu" /></div>
+        </div>
+    </div>
+    <hr />
+    @Html.ActionLink("Quay lại", "Index");
+    <hr />
+}
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        function AjaxFunction(result) {
+            console.log(result);
+            $("#Specialized").val(result[0]["SpecializedName"])
+            $("#Quantity").val(result[0]["Quantity"])
+            $(".avatar").attr("src", "/Upload/Images/BookType/" + result[0]["UrlImage"]);
+        }
+        $(document).ready(function () {
+            var idCurr = $("#BookTypeID").val();
+            sentAjax("/BookType/GetData", 'get', "json", { id: idCurr }, AjaxFunction);
+            $("#BookTypeID").on('change', function () {
+                var id = parseInt($(this).val());
+                sentAjax("/BookType/GetData", 'get', "json", { id: id }, function (result) {
+                    console.log(result);
+                    $("#Specialized").val(result[0]["SpecializedName"])
+                    $("#Quantity").val(result[0]["Quantity"])
+                    $(".avatar").attr("src", "/Upload/Images/BookType/" + result[0]["UrlImage"]);
+                });
+            });
+        });
+    </script>
+}
+

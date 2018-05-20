@@ -41,7 +41,7 @@ namespace QuanLyThuVien.Controllers
                     if (user.QuanLy)
                         return RedirectToAction("Index", "Employee");
                     if (user.ThuThu)
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Book");
                 }
                 else
                 {
@@ -64,7 +64,7 @@ namespace QuanLyThuVien.Controllers
                         new RouteValueDictionary(new { controller = "Employee", action = "Index" }));
                 else if (user.ThuThu)
                     filterContext.Result = new RedirectToRouteResult(
-                        new RouteValueDictionary(new { controller = "Home", action = "Index" }));
+                        new RouteValueDictionary(new { controller = "Book", action = "Index" }));
             }
 
             base.OnActionExecuting(filterContext);

@@ -1,0 +1,104 @@
+﻿@model IEnumerable<Model.EF.HireDetail>
+
+@*@model PagedList.IPagedList<Model.EF.Employee>
+    @using PagedList.Mvc;*@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+@{
+    ViewBag.Title = "Quản lý phiếu mượn";
+    Layout = "~/Views/Shared/_FrameLayout.cshtml";
+}
+
+<h2>Danh sách các phiếu mượn sách</h2>
+<p>
+    @Html.ActionLink("Đến trang quản lý sách", "Index","Book", new { }, new { @class = "btn btn-primary" })
+</p>
+@{ var user = (Model.ViewModels.EmployeeLogin)Session[QuanLyThuVien.Common.CommonSession.USER_SESSION]; }
+<div class="table-responsive">
+    <table id="table_id" class="display table-data-center table-bordered">
+        <thead>
+            <tr>
+                <th>Mã phiếu</th>
+                <th>Mã sách</th>
+                <th>Tên sách</th>
+                <th>Họ tên</th>
+                <th>Số điện thoại</th>
+                <th>Ngày mượn</th>
+                <th>Ngày hết hạn</th>
+                <th>Trạng thái</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{foreach (var item in Model)
+                {
+                    <tr id="@item.HireDetailID">
+                        <td>@item.HireDetailID</td>
+                        <td>@item.Book.BookCode</td>
+                        <td>@item.Book.BookType.BookTypeName</td>
+                        <td>@item.Member.FullName</td>
+                        <td>@item.Member.Phone</td>
+                        <td>@item.HireDate.ToString("dd/MM/yyyy")</td>
+                        <td>@Html.Raw(item.HireDate.AddDays(item.HireTime.NumberOfWeek * 7).ToString("dd/MM/yyyy"))</td>
+                        @{
+                            string textStatus = "";
+                            string textColor = "blue";
+                            if (item.Status == 0)
+                            {
+                                textStatus = "Đã trả";
+                            }
+                            else if (item.Status == 1)
+                            {
+                                textStatus = "Đang mượn";
+                            }
+                            else if (item.Status == 2)
+                            {
+                                textStatus = "Hết hạn";
+                                textColor = "red";
+                            }
+                        }
+                        <td style="color:@textColor" ;>@textStatus</td>
+                        <td>
+                            @if (item.Status != 0)
+                            {
+                                <button class="btn btn-primary btn-pay-book" data-url="/HireDetails/PayBook/@item.HireDetailID">Trả sách</button>
+                            }
+                            <button class="btn btn-info btn-details" data-url="/HireDetails/Details/@item.HireDetailID">Chi tiết</button>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+
+            $(".btn-pay-book").click(function () {
+                var url = $(this).attr('data-url');
+                var btnPay = $(this);
+                var tdStatus = btnPay.closest('td').prev();
+                var res = confirm("Bạn muốn trả?");
+                if (res === true) {
+                    sentAjax(url, 'post', 'text', {}, function (result) {
+                        var result = parseInt(result);
+                        if (result === -2)
+                            alert("Có lỗi xãy ra vui lòng tải lại trang!");
+                        else if (result === -1)
+                            alert("Bản ghi này không tồn tại, tải lại trang và thử lại");
+                        else if (result === 1) {
+                            alert("Thành công");
+                            tdStatus.css("color", "blue");
+                            tdStatus.html("Đã trả");
+                            btnPay.remove();
+                        }
+                    });
+                }
+            });
+        });
+        
+    </script>
+}

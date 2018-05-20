@@ -29,6 +29,7 @@ namespace Model.EF
         public string Address { get; set; }
 
         [StringLength(13)]
+        [RegularExpression("^[0-9]{9,13}$", ErrorMessage = "Chỉ nhập 0-9 gồm 9-13 số")]
         public string Phone { get; set; }
 
         [StringLength(100)]

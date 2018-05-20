@@ -1,0 +1,62 @@
+﻿@model Model.EF.Book
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            <td><img src="~/Upload/Images/BookType/@Model.BookType.UrlImage" class="img-center-in-div" height="100" width="100" /></td>
+        </tr>
+        <tr>
+            <td class="form-group">
+                <label class="control-label col-md-5">Tên đầu sách: </label>
+                <label class="control-label col-md-7">@Model.BookType.BookTypeName</label>
+            </td>
+            <td class="form-group">
+                <label class="control-label col-md-5">Mã sách: </label>
+                <label class="control-label col-md-7">@Model.BookCode</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="form-group">
+                <label class="control-label col-md-5">Ngày nhập: </label>
+                <label class="control-label col-md-7">@Model.ReceiptDate</label>
+            </td>
+            <td class="form-group">
+                <label class="control-label col-md-5">Tình trạng: </label>
+                <label class="control-label col-md-7" style="color:@Html.Raw((Model.Status)?"red":"blue")">@Html.Raw((Model.Status)?"Đã mượn":"Chưa mượn")</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="form-group">
+                <label class="control-label col-md-5">Tác giả: </label>
+                <label class="control-label col-md-7">@Model.BookType.Author</label>
+            </td>
+            <td class="form-group">
+                <label class="control-label col-md-5">Nhà xuất bản: </label>
+                <label class="control-label col-md-7">@Model.BookType.PublishingHouse</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="form-group">
+                <label class="control-label col-md-5">Chuyên nghành: </label>
+                <label class="control-label col-md-7">@Model.BookType.Specialized.SpecializedName</label>
+            </td>
+            <td>
+                <label class="control-label col-md-5">Kích thước: </label>
+                <label class="control-label col-md-7">@Model.BookType.Size</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="form-group">
+                <label class="control-label col-md-5">Số trang: </label>
+                <label class="control-label col-md-7">@Model.BookType.NumberOfPage</label>
+            </td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+<div style="padding:10px">
+    <label class="control-label">Mô tả: </label>
+    <hr />
+    @Html.Raw(Model.BookType.Description)
+</div>
+

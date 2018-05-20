@@ -25,6 +25,11 @@ namespace QuanLyThuVien
                defaults: new { controller = "User", action = "ChangePassword", id = UrlParameter.Optional }
            );
 
+            //routes.MapRoute(
+            //    name: "Default",
+            //    url: "{controller}/{action}/{id}/{status}",
+            //    defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional, status = UrlParameter.Optional }
+            //);
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

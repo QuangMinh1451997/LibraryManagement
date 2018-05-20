@@ -1,0 +1,45 @@
+﻿@model Model.EF.HireTime
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_FrameLayout.cshtml";
+}
+
+<h2>Thêm thời gian thuê</h2>
+
+@using (Html.BeginForm("Create", "HireTime", FormMethod.Post, new { @class = "form" }))
+{
+    <h2>Thông tin</h2>
+    @Html.AntiForgeryToken()
+    <div class="row">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </div>
+    <hr />
+    <div class="table-responsive row">
+        <div class="col-sm-12">
+            <table class="hover-td table table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="form-group">
+                            <label class="control-label col-sm-3">Thời gian thuê (số tuần): </label>
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.NumberOfWeek, new { htmlattributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NumberOfWeek, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                        <td>
+                            <input class="btn btn-primary button-250" id="btn-save" type="submit" value="Lưu" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <hr />
+    @Html.ActionLink("Quay lại", "Index", "Setting");
+    <hr />
+}
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

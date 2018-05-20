@@ -1,0 +1,126 @@
+﻿@model Model.EF.HireDetail
+
+@*@model PagedList.IPagedList<Model.EF.Employee>
+    @using PagedList.Mvc;*@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+@{
+    ViewBag.Title = "Quản lý phiếu mượn";
+    Layout = "~/Views/Shared/_FrameLayout.cshtml";
+}
+
+<h2>Danh sách các phiếu mượn sách</h2>
+
+@{ var user = (Model.ViewModels.EmployeeLogin)Session[QuanLyThuVien.Common.CommonSession.USER_SESSION]; }
+@using (Html.BeginForm("Create", "HireDetails", FormMethod.Post, new { @class = "form" }))
+{
+    <h2>Thông tin</h2>
+    @Html.AntiForgeryToken()
+    <div class="row">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </div>
+    <hr />
+    @Html.HiddenFor(model => model.BookID)
+    @Html.HiddenFor(model => model.MemberID)
+    <div class="table-responsive row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-2" style="padding: 15px; overflow:hidden">
+                    <img src="~/Upload/Images/BookType/@Model.Book.BookType.UrlImage" class="avatar img-center-in-div" height="200" width="150" />
+                </div>
+                <div class="col-sm-10">
+                    <table class="hover-td table table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Tên sách: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" value="@Model.Book.BookType.BookTypeName" disabled="disabled" />
+                                    </div>
+                                </td>
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Mã sinh viên: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" id="student-code" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Tên thành viên: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" id="member-name" disabled="disabled" />
+                                    </div>
+                                </td>
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Số điện thoại: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" id="phone" disabled="disabled" />
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Địa chỉ: </label>
+                                    <div class="col-sm-9">
+                                        <input class="form-control" id="address" disabled="disabled" />
+                                    </div>
+                                </td>
+                                <td class="form-group">
+                                    <label class="control-label col-sm-3">Thời gian mượn (Tuần): </label>
+                                    <div class="col-sm-9">
+                                        @Html.DropDownListFor(model => model.HireTimeID, (SelectList)ViewBag.SelListHireTime, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.HireTimeID, "", new { @class = "text-danger" })
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div><input class="btn btn-primary button-250" id="btn-save" type="submit" value="Lưu" /></div>
+        </div>
+    </div>
+    <hr />
+    @Html.ActionLink("Quay lại", "Index");
+    <hr />
+}
+
+@section scripts{
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+
+            $(document).on("keypress", "form", function (event) {
+                return event.keyCode != 13;
+            });
+            $('#student-code').keypress(function (event) {
+                if (event.which == 13) {
+                    var studentCode = $(this).val();
+                    sentAjax("/Member/GetData", 'get', 'json', { studentCode: studentCode }, function (result) {
+                        console.log(result);
+                        if (result == null) {
+                            alert("Mã sinh viên không hợp lệ");
+                            $("input[name='MemberID']").val("");
+                            $("#member-name").val("");
+                            $("#phone").val("");
+                            $("#address").val("");
+                        }
+                        else {
+                            $("input[name='MemberID']").val(result['MemberID']);
+                            $("#member-name").val(result['FullName']);
+                            $("#phone").val(result['Phone']);
+                            $("#address").val(result['Address']);
+                        }
+                    });
+                }
+
+            });
+            //$('#BookID').focusout(function () {
+            //    alert("Out");
+            //});
+        });
+
+    </script>
+}

@@ -1,0 +1,30 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Error404</title>
+</head>
+@{ var user = (Model.ViewModels.EmployeeLogin)Session[QuanLyThuVien.Common.CommonSession.USER_SESSION]; }
+<body>
+    <div>
+        <img src="~/Content/images/404.png" style="display: block; margin: 0 auto;" />
+        <h1>
+            @if (user.ThuThu)
+            {
+                @Html.ActionLink("Về trang chính", "Index", "Book")
+            }
+            else
+            {
+                @Html.ActionLink("Về trang chính", "Index", "Employee")
+            }
+        </h1>
+
+    </div>
+</body>
+</html>

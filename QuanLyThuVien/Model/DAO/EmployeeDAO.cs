@@ -30,7 +30,7 @@ namespace Model.DAO
         {
             try
             {
-                var employeeCurr = db.Employees.Find(employeeUpdate.EmployeeID);
+                var employeeCurr = db.Employees.SingleOrDefault(em => em.EmployeeID == employeeUpdate.EmployeeID && em.Deleted == false);
                 if (employeeCurr == null)
                     return null;
 
@@ -55,7 +55,7 @@ namespace Model.DAO
         public Employee EditByQuanLy(Employee employeeUpdate, string username)
         {
 
-            var employeeCurr = db.Employees.Find(employeeUpdate.EmployeeID);
+            var employeeCurr = db.Employees.SingleOrDefault(em => em.EmployeeID == employeeUpdate.EmployeeID && em.Deleted == false);
             if (employeeCurr == null)
                 return null;
 
@@ -76,7 +76,7 @@ namespace Model.DAO
 
         public int Delete(int id)
         {
-            var employeeDelete = db.Employees.Find(id);
+            var employeeDelete = db.Employees.SingleOrDefault(em=>em.EmployeeID==id && em.Deleted == false);
             if (employeeDelete == null)
                 return -1;
 
@@ -95,7 +95,18 @@ namespace Model.DAO
 
         public Employee GetEmployeeByID(int id)
         {
-            return db.Employees.Find(id);
+            return db.Employees.SingleOrDefault(em => em.EmployeeID == id && em.Deleted == false);
+        }
+
+        public Employee GetEmployeeByUsername(string username)
+        {
+            return db.Employees.SingleOrDefault(em => em.Account.Username == username && em.Deleted == false);
+        }
+
+        public int GetNextID()
+        {
+            return Helper.GetNextID(db, "Employees");
+            //return db.Database.SqlQuery<int>("SELECT IDENT_CURRENT('Employees')").SingleOrDefault();
         }
     }
 }

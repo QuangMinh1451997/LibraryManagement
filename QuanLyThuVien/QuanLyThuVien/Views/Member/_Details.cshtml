@@ -1,0 +1,39 @@
+﻿@model Model.EF.Member
+<table class="table table-bordered">
+    <tbody>
+        <tr>
+            <td><img src="~/Upload/Images/Member/@Model.UrlAvatar" class="img-center-in-div" height="130" width="100" /></td>
+        </tr>
+        <tr>
+            <td class="form-group">
+                <label class="control-label col-md-5">Họ và tên: </label>
+                <label class="control-label col-md-7">@Model.FullName</label>
+            </td>
+            <td class="form-group">
+                <label class="control-label col-md-5">Ngày sinh: </label>
+                <label class="control-label col-md-7">@Model.BirthDay.ToString("dd/mm/yyyyy")</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="form-group">
+                <label class="control-label col-md-5">Mã sinh viên: </label>
+                <label class="control-label col-md-7">@Model.StudentCode</label>
+            </td>
+            <td class="form-group">
+                <label class="control-label col-md-5">Giới tính: </label>
+                <label class="control-label col-md-7">@Html.Raw((Model.Sex) ? "Nam" : "Nữ")</label>
+            </td>
+        </tr>
+        <tr>
+            <td class="form-group">
+                <label class="control-label col-md-5">Số điện thoại: </label>
+                <label class="control-label col-md-7">@Model.Phone</label>
+            </td>
+            <td class="form-group">
+                <label class="control-label col-md-5">Địa chỉ: </label>
+                <label class="control-label col-md-7">@Model.Address</label>
+            </td>
+        </tr>
+    </tbody>
+</table>

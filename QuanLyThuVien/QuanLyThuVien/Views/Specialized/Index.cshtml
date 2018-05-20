@@ -1,0 +1,51 @@
+﻿@*@model PagedList.IPagedList<Model.EF.Employee>
+    @using PagedList.Mvc;*@
+@model IEnumerable<Model.EF.Specialized>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.css">
+
+
+@{
+    ViewBag.Title = "Quản lý chuyên nghành";
+    Layout = "~/Views/Shared/_FrameLayout.cshtml";
+}
+
+<h2>Danh sách chuyên nghành</h2>
+
+<p>
+    @Html.ActionLink("Thêm chuyên nghành", "Create", new { }, new { @class = "btn btn-primary" })
+</p>
+@{ var user = (Model.ViewModels.EmployeeLogin)Session[QuanLyThuVien.Common.CommonSession.USER_SESSION]; }
+<div class="table-responsive">
+    <table id="table_id" class="display table-data-center table-bordered">
+        <thead>
+            <tr>
+                <th>Tên chuyên nghành</th>
+                <th>Mô tả</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{foreach (var item in Model)
+                {
+                    <tr id="@item.SpecializedID">
+                        <td>@item.SpecializedName</td>
+                        <td>
+                            @Html.TextAreaFor(i=>item.Descripstion, new { @class = "form-control", @rows = "3", @readonly ="readonly" })
+                        </td>
+                        <td>
+                            @Html.ActionLink("Sửa", "Edit", "Specialized", new { id = item.SpecializedID }, new { @class = "btn btn-warning" })
+                            <button class="btn btn-danger btn-delete" data-url="/Specialized/Delete/@item.SpecializedID">Xóa</button>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@section scripts{
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script>
+        $('#table_id').DataTable();
+    </script>
+}

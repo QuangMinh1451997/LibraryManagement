@@ -1,0 +1,51 @@
+﻿@model Model.EF.Specialized
+
+@{
+    ViewBag.Title = "Sửa";
+    Layout = "~/Views/Shared/_FrameLayout.cshtml";
+}
+
+<h2>Sửa chuyên nghành</h2>
+
+@using (Html.BeginForm("Edit", "Specialized", FormMethod.Post, new { @class = "form" }))
+{
+    <h2>Thông tin</h2>
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.SpecializedID)
+    <div class="row">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    </div>
+    <hr />
+    <div class="table-responsive row">
+        <div class="col-sm-12">
+            <table class="hover-td table table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="form-group">
+                            <label class="control-label col-sm-3">Tên chuyên nghành: </label>
+                            <div class="col-sm-9">
+                                @Html.EditorFor(model => model.SpecializedName, new { htmlattributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SpecializedName, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                        <td class="form-group">
+                            <label class="control-label col-sm-3">Mô tả: </label>
+                            <div class="col-sm-9">
+                                @Html.TextAreaFor(model => model.Descripstion, new { @class = "form-control", @rows = "3" })
+                                @Html.ValidationMessageFor(model => model.Descripstion, "", new { @class = "text-danger" })
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div><input class="btn btn-primary button-250" id="btn-save" type="submit" value="Lưu" /></div>
+        </div>
+    </div>
+    <hr />
+    @Html.ActionLink("Quay lại", "Index");
+    <hr />
+}
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
