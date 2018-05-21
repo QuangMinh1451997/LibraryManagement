@@ -30,9 +30,9 @@ namespace Model.DAO
         public Member GetMemberByStudentCode(string studentCode)
         {
             return db.Members
-                .Include(m=>m.HireDetails)
+                .Include(m => m.HireDetails)
                 .SingleOrDefault(m => m.Deleted == false && m.StudentCode.ToLower() == studentCode);
-            
+
         }
 
         public Member GetMemberByStudentCodeNoLoad(string studentCode)
@@ -76,10 +76,10 @@ namespace Model.DAO
 
         public int Delete(int id, string username)
         {
-            var member = db.Members.Include(m=>m.HireDetails).SingleOrDefault(m=>m.MemberID == id && m.Deleted == false);
+            var member = db.Members.Include(m => m.HireDetails).SingleOrDefault(m => m.MemberID == id && m.Deleted == false);
             if (member == null)
                 return -1;
-            if (member.HireDetails.Where(hr=>hr.Status==2).Count()>0)
+            if (member.HireDetails.Where(hr => hr.Status == 1).Count() > 0)
                 return -2;
             member.Deleted = true;
             Helper.SetDefaultEditModel(member, username);
@@ -88,14 +88,14 @@ namespace Model.DAO
         }
         // true : đã tồn tại
         //false : chưa tồn tại
-        public bool CheckStudentCodeAvailabel(int id,string studentCode)
+        public bool CheckStudentCodeAvailabel(int id, string studentCode)
         {
-            var member = db.Members.SingleOrDefault(m =>m.MemberID!=id &&  m.StudentCode.ToLower().CompareTo(studentCode) == 0);
-            return (member!=null) ? true : false;
+            var member = db.Members.SingleOrDefault(m => m.MemberID != id && m.StudentCode.ToLower().CompareTo(studentCode) == 0 && m.Deleted == false);
+            return (member != null) ? true : false;
         }
         public bool CheckStudentCodeAvailabel(string studentCode)
         {
-            var member = db.Members.SingleOrDefault(m=> m.StudentCode.ToLower().CompareTo(studentCode) == 0);
+            var member = db.Members.SingleOrDefault(m => m.StudentCode.ToLower().CompareTo(studentCode) == 0 && m.Deleted == false);
             return (member != null) ? true : false;
         }
     }

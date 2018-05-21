@@ -137,7 +137,6 @@ namespace QuanLyThuVien.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public int Delete(int? id)
         {
             try

@@ -76,12 +76,12 @@ namespace Model.DAO
 
         public bool CheckBookCodeIsExisted(string bookCode)
         {
-            var book = db.Books.SingleOrDefault(b => b.BookCode.ToLower() == bookCode);
+            var book = db.Books.SingleOrDefault(b => b.BookCode.ToLower() == bookCode && b.Deleted == false);
             return (book != null) ? true : false;
         }
         public bool CheckBookCodeIsExisted(int bookID,string bookCode)
         {
-            var book = db.Books.SingleOrDefault(b => b.BookID != bookID && b.BookCode.ToLower() == bookCode);
+            var book = db.Books.SingleOrDefault(b => b.BookID != bookID && b.BookCode.ToLower() == bookCode && b.Deleted == false);
             return (book != null) ? true : false;
         }
     }
