@@ -1,3 +1,9 @@
-1405199710	123456	admin
-1212199711	123456	qu?n l�	
-1111199117	123456	th? thu
+----admin
+username: 1405199710
+password: 123456
+---- manager
+username: 1212199711
+password: 123456
+---- thủ thư
+username: 1111199117
+password: 123456
